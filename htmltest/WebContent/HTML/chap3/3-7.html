@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+	<form name="testform" method="GET/POST" action="url"><!--메인에서 가장 기본 action에는 이동하는 url이 나옴--><!--url에 http://naver.com을 치면 로그인 버튼 누르면 네이버로 넘어감--><!--method의 default 값은 get이다. post라고 지정하지 않는 이상 오타가나든 안쓰던 다 get으로 넘어감 그래서 아이디랑비번이 주소창에 떠짐-->
+	<ul type="none">
+		<li>
+			<label for="userid">아이디</label>
+			<input type = "tel" name= "userid" id ="userid" size = "15" maxlength="12"> <!--type을 tel로 하면 핸드폰에서 들어가면 숫자패드나옴(pc에선 소용X)-->
+		</li>
+		<li> 
+			<label for="pass">비밀번호</label>
+			<input type = "password" name= "pass" id="userid" size ="10">
+		</li>
+		<li><input type="submit" value="로그인"></li><!--type을 submit을 하면 제출 버튼이 된다.--><!--제출 이름을 바꾸고 싶다면 value를 사용-->
+		<li><input type="reset" value="취소"></li>
+
+	</ul>
+	</form>
+ </body>
+</html>

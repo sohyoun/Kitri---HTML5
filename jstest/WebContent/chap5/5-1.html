@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function() {
+	var view = document.getElementById("view");
+	var view2 = document.getElementById("view2");
+	view.innerHTML='<font color="magenta" size="15">문자열 추가해요</font>'
+	view2.style.color = "steelblue";
+	view2.style.backgroundColor="orange";
+	document.getElementById("img").setAttribute("src", "/js/img/logo.png");
+	
+}//window.onload : window 다 실행된 다음 이부분 해라 >>즉 body부분 먼저 실행되고 script부분 실행됨
+</script>
+</head>
+<body>
+<div align="center">
+	<div id="view"></div>
+	<div id="view2">안녕하세요.</div>
+	<img id="img">
+</div>
+</body>
+</html>

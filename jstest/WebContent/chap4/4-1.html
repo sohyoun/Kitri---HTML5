@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function alertOpen() {
+	alert("알림창입니다.");
+	
+}
+
+function confirmOpen() {
+	if (confirm("진짜 삭제??")) {
+		console.log("삭제되었습니다!!!");
+	} else {
+		console.log("취소되었습니다!!!")
+	} 
+}
+
+function promptOpen() {
+	var txt = prompt("이름입력!!!", "");
+	console.log("당신의 이름은 " +txt+"입니다.");
+}
+
+function myOpen() {
+	window.open("/js/chap4/my.html","test","width=400, height=300, top=200, left=300");
+	//window.open("페이지URL","창이름","특성") 더 여러개 해도 되지만 보통 3개함
+	//같은폴더안에 있기 때문에 그냥 my.html 해도 되지만
+	//상대경로보다는 절대경로를 쓰는 것이 좋다
+	
+	//창이름이 없으면 버튼 누를 때 마다 새로운 창이 계속 열린다.
+	//보통은 창이 떠 있으면 버튼 눌러도 그 창이 다시 뜬다. (창이름 지정)
+	
+	//창특성에는 width,height,top,left,menubar,status,scrollbars,toolbar,resizable,location 등이 있다.
+}
+</script>
+</head>
+<body>
+<button onclick="javascript:alertOpen();">알림창</button>
+<button onclick="javascript:confirmOpen()">확인창</button>
+<button onclick="javascript:promptOpen();">입력창</button>
+<button onclick="javascript:myOpen();">새창열기</button><br>
+span 메세지 : <span id="view" style="background-color:steelblue"></span><!-- 블록단위 -->
+div 메세지 : <div style="background-color:orange">안녕하헤쇼</div><!-- 라인단위 -->
+p 메세지 : <p style ="background-color:green">안녕하세요</p><!-- 한줄띄고 라인단위 -->
+</body>
+</html>

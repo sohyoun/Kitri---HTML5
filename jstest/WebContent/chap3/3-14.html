@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+//객체 리터럴
+var empty_object ={};
+var member = {
+		"user-name" : "홍길동" ,
+		"age" : 20 ,
+		"city" : "서울"
+};
+
+//객체의 속성에 접근
+console.log(member.age);		//1.dot 표기법
+console.log(member["age"]);	//2.[] 표기법
+
+//속성명에 연산자가 포함된 경우 [] 표기법만 접근 가능
+console.log(member["user-name"]);	//홍길동
+console.log(member.user-name);		//NaN
+
+//속성 값 변경
+member.age = 30;
+member["city"] = "경기도";
+
+console.log(member["age"]);		//30
+console.log(member.city);		//경기도
+
+//속성 추가
+member.tel ="010-1234-5678";
+console.log(member.tel);		//010-1234-5678
+//JavaScript는 동적으로 객체를 추가, 삭제 함으로 tel을 추가 가능
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

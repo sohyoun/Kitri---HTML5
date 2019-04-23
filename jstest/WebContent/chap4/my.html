@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function myClose() {
+	opener.document.getElementById("view").innerHTML="오늘그만본다!!"
+	//opener : 연 놈. 그 창을 연 놈. 따라서 여기서는 parent창을 뜻함.
+	self.close();//java의 this와 같음
+	//부모창을 닫으려면 parent하면 됨.
+	//window로 해도 닫히긴 하지만 self나 parent나 둘 다 window임으로 정확한 표현은 self
+	//만약 tab으로 열린 창인데 window.close하면 다 닫힐 수 있음.
+}</script>
+</head>
+<body>
+새로운 창입니다.
+<br><br><br><br><br><br>
+<a href="javascript:myClose();">1주일동안 열지 않기</a>
+</body>
+</html>
