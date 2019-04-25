@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE book[
+	<!ELEMENT book (title,author,price,description?)> 
+		<!ELEMENT title (#PCDATA)>
+		<!ELEMENT author (#PCDATA)>
+		<!ELEMENT price (#PCDATA)>
+		<!ELEMENT description (#PCDATA)>
+]><!-- DOCTYPE 뒤에는 반드시 root 엘리먼트 이름이 나와야함 -->
+<!--book이라는 element 만들고 그 안에 title,author,price element들 넣음-->
+<!-- <!ELEMENT book 뒤에 type 지정하기 전에 반드시 공백 넣어야함 -->
+<!-- title,author,price도 element임으로 element라는 것 알려줌 -->
+<!-- title,author,price는 pcdata임. 문자 -->
+<!-- element 순서 지켜야함 title, author,price -->
+
+<book>
+	<title>java &amp; xml</title><!-- &를 그냥 쓸 수 X -->
+	<author>홍길동</author>
+	<price>30000</price>
+	<!-- 여기까지는 웰폼드 문서. 실행 되면 그건 웰폼드 문서이다. 문서 자체에 오류 X -->
+</book>

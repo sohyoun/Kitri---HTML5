@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE booklist SYSTEM "book.dtd">
+
+<booklist>
+<book id="isbn">
+	<title>나미야잡화점의 비밀</title>
+	<author>
+		<name>고세라</name>
+		<tel>01057773333</tel>
+		<address>경기도 안양시</address>
+	</author>
+	<publisher>소현이네</publisher>
+	<price>12000</price>
+</book>
+
+<book id="isb" kind="소설">
+	<title>메롱롱</title>
+	<author>
+		<writer sex="여">박미래</writer>
+		<tel>01057778888</tel>
+		<address>경기도 안양시</address>
+	</author>
+	<publisher>소현이네</publisher>
+	<price>12000</price>
+</book>
+
+</booklist>
