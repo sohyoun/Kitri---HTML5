@@ -29,7 +29,6 @@ public class GuestBookWrite extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 //		1. data get ( name, subject, content )
 		request.setCharacterEncoding("utf-8");
@@ -42,8 +41,8 @@ public class GuestBookWrite extends HttpServlet {
 		try {
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.52:1521:orcl", "kitri", "kitri");
 			StringBuffer sql = new StringBuffer();
-			sql.append("insert into guestbook(name, subject, content, logtime)"
-					+ "values(?, ?, ?, sysdate)");
+			sql.append("insert into guestbook(seq, name, subject, content, logtime)"
+					+ "values(guestbook_seq.nextval, ?, ?, ?, sysdate)");
 			
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, name);
@@ -71,8 +70,12 @@ public class GuestBookWrite extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println(" 	<body>");
+		if(cnt !=0 ) {
 			out.println("글 등록 완료");
-
+			
+		} else {
+			
+		}
 		out.println(" 	</body>");
 		out.println("</html>");
 	}
