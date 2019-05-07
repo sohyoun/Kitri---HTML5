@@ -24,7 +24,7 @@ cnt++;
 <body>
 당신은
 <%for(int i=0;i<8;i++) {%>
-<img src="/basicjsp/img/<%cnts.charAt(i);%>.png" width="50">
+<img src="/basicjsp/img/<%=cnts.charAt(i)%>.png" width="50">
 <%}%>
 번째 방문자입니다.
 </body>
