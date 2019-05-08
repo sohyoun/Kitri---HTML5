@@ -1,0 +1,61 @@
+**원래 엑셀로 만듦
+
+membermvc
+	src
+		- com.kitri.admin.controller
+		  AdminController.java (Servlet : /admin)
+		
+		- com.kitri.admin.model
+		
+		- com.kitri.admin.model.dao
+		  AdminDao.java (I)
+		  AdminDaoImpl.java
+		  
+		- com.kitri.admin.model.service
+		  AdminService.java (I)
+		  AdminServiceImpl.java
+		
+		- com.kitri.member.controller
+		  MemberController.java (Servlet : /user)
+		
+		- com.kitri.member.model
+		  MemberDto.java
+		  MemberDetailDto.java
+		  ZipcodeDto.java
+		
+		- com.kitri.member.model.dao
+		  MemberDao.java (I)
+		  MemberDaoImpl.java
+		
+		- com.kitri.member.model.service
+		  MemberService.java (I)
+		  MemberServiceImpl.java
+				
+		- com.kitri.util
+		  DBConnection.java
+		  DBClose.java
+		  Encoder.java
+		
+	webContent
+		- js - member.js
+		- css - *.css
+		- img - *.jpg, png, gif
+		- admin
+		   - member
+		  	 memberlist.jsp
+		
+		- user
+		   - member
+		     member.jsp
+		     registerok.jsp
+		     registerfail.jsp
+		     idcheck.jsp(id중복확인)
+		     zipsearch.jsp(우편번호찾기)
+		     membermodify.jsp(회원정보수정)
+		   
+		   - login
+		  	 login.jsp
+		  	 loginok.jsp
+		  	 loginfail.jsp
+		  	 
+		  index.jsp
