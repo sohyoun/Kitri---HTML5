@@ -1,84 +1,104 @@
 package com.kitri.member.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 import com.kitri.member.model.MemberDetailDto;
+import com.kitri.member.model.MemberDto;
 import com.kitri.member.model.service.MemberServiceImpl;
-import com.kitri.util.SiteConstance;
 
-@WebServlet("/user")
-public class MemberController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class MemberController {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String act = request.getParameter("act");
+	private static MemberController memberController;
 
-		// act.equals("mvjoin") >> nullpointerexception나기 때문에 좋지 않음. act가 null
-		// 이걸 쓰고 싶으면 if(act!=null)을 위에서 해줘야함.
-		// 따라서 mvjoin은 null일수없기 때문에 밑의 방법이 더 좋다.
-		if ("mvjoin".equals(act)) {
-			response.sendRedirect("/membermvc/user/member/member.jsp");
-		} else if ("mvlogin".equals(act)) {
-			response.sendRedirect("/membermvc/user/login/login.jsp");
-		} else if ("idcheck".equals(act)) {
-			String sid = request.getParameter("sid");
-//			System.out.println("검색아이디 : " + sid);
-			String resultXML = MemberServiceImpl.getMemberService().idCheck(sid);
+	static {
+		memberController = new MemberController();
+	}
 
-			response.setContentType("text/xml;charset=UTF-8");// text문자열로 보내지만 받을때 xml로 인식해라
-			PrintWriter out = response.getWriter();
-			out.print(resultXML);
-
-		} else if ("zipsearch".equals(act)) {
-			String doro = request.getParameter("doro");
-//			System.out.println("검색 도로명 : "+doro);
-			String resultXML = MemberServiceImpl.getMemberService().zipSearch(doro);
-//			System.out.println(resultXML);
-			response.setContentType("text/xml;charset=UTF-8");// text문자열로 보내지만 받을때 xml로 인식해라
-			PrintWriter out = response.getWriter();
-			out.print(resultXML);
-		} else if ("register".equals(act)) {
-			MemberDetailDto memberDetailDto = new MemberDetailDto();
-			memberDetailDto.setName(request.getParameter("name"));
-			memberDetailDto.setId(request.getParameter("id"));
-			memberDetailDto.setPass(request.getParameter("pass"));
-			memberDetailDto.setEmailid(request.getParameter("emailid"));
-			memberDetailDto.setEmaildomain(request.getParameter("emaildomain"));
-			memberDetailDto.setTel1(request.getParameter("tel1"));
-			memberDetailDto.setTel2(request.getParameter("tel2"));
-			memberDetailDto.setTel3(request.getParameter("tel3"));
-			memberDetailDto.setZipcode(request.getParameter("zipcode"));
-			memberDetailDto.setAddress(request.getParameter("address"));
-			memberDetailDto.setAddressDetail(request.getParameter("address_detail"));
-			
-			int cnt = MemberServiceImpl.getMemberService().registerMember(memberDetailDto);
-			
-			System.out.println("cnt===="+cnt);
-		} else if ("".equals(act)) {
-
-		} else if ("".equals(act)) {
-
-		} else if ("".equals(act)) {
-
-		} else if ("".equals(act)) {
-
-		}
+	public MemberController() {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding(SiteConstance.ENCODE);
-		doGet(request, response);
+	public static MemberController getMemberController() {
+		return memberController;
+	}
+
+	public String register(HttpServletRequest request, HttpServletResponse response) {
+		String path = "/index.jsp";
+		MemberDetailDto memberDetailDto = new MemberDetailDto();
+		memberDetailDto.setName(request.getParameter("name"));
+		memberDetailDto.setId(request.getParameter("id"));
+		memberDetailDto.setPass(request.getParameter("pass"));
+		memberDetailDto.setEmailid(request.getParameter("emailid"));
+		memberDetailDto.setEmaildomain(request.getParameter("emaildomain"));
+		memberDetailDto.setTel1(request.getParameter("tel1"));
+		memberDetailDto.setTel2(request.getParameter("tel2"));
+		memberDetailDto.setTel3(request.getParameter("tel3"));
+		memberDetailDto.setZipcode(request.getParameter("zipcode"));
+		memberDetailDto.setAddress(request.getParameter("address"));
+		memberDetailDto.setAddressDetail(request.getParameter("address_detail"));
+
+		int cnt = MemberServiceImpl.getMemberService().registerMember(memberDetailDto);
+//		System.out.println("cnt===="+cnt); //2가 나와야함
+
+		// cnt에 따라 registerok와 registerfail로 감
+		if (cnt != 0) {
+			// memberDetailDto는 registerok에만 필요함 > request에 담음
+			request.setAttribute("userInfo", memberDetailDto);
+			path = "/user/member/registerok.jsp"; // 갈꺼다 라는 지정 //실제 가는것은 frontcontroller에서
+		} else {
+			path = "/user/member/registerfail.jsp";
+		}
+		return path;
+	}
+
+	public String login(HttpServletRequest request, HttpServletResponse response) {
+		String path = "/index.jsp";
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+
+		MemberDto memberDto = MemberServiceImpl.getMemberService().loginMember(id, pass);
+
+		if (memberDto != null) {
+			//////////////////// cookie////////////////////////////////////////////
+			String idsv = request.getParameter("idsave");
+			if ("idsave".equals(idsv)) {
+				Cookie cookie = new Cookie("kid_inf", id);
+				cookie.setDomain("localhost");
+				cookie.setPath(request.getContextPath());
+				cookie.setMaxAge(60 * 60 * 24 * 365 * 50);// 50년
+				response.addCookie(cookie);
+			} else { // 체크풀었다면
+				Cookie cookie[] = request.getCookies();
+				if(cookie != null) {
+					for(Cookie c : cookie) {
+						if("kid_inf".equals(c.getName())){
+							c.setDomain("localhost");
+							c.setPath(request.getContextPath());
+							c.setMaxAge(0);// 50년
+							response.addCookie(c);
+							break;
+						}
+					}
+				}
+			}
+			/////////////////// session////////////////////////////////////////////
+			HttpSession session = request.getSession();// session에 담아서 로그인이 되게 만듬
+			session.setAttribute("userInfo", memberDto);
+			//////////////////////////////////////////////////////////////////////
+			path = "/user/login/loginok.jsp";
+		} else {
+			path = "/user/login/loginfail.jsp";
+		}
+
+		return path;
+	}
+
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+//		session.setAttribute("userInfo", null); >> 별로 좋지 않은 방법
+//		session.removeAttribute("userInfo");	>> 지우는 방법
+		session.invalidate(); // >> 이 안의 모든 데이터를 지움.
+		return "/user/login/login.jsp";
 	}
 
 }
