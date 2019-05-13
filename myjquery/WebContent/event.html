@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+$(document).ready(function() {
+	var $aObj = $("div>a");
+	//console.log($aObj);
+	$aObj.click(function() {
+		alert("클릭되었습니다.");
+		$(this).css("background-color","yellow");
+		return false; //기본이벤트를 막고 이벤트전파막읍
+	});
+	
+
+	$("div").click(function() {
+		$(this).css("background-color","gray");
+	});
+});
+//window객체에서 load 이벤트가 발생했을 때 처리할 핸들러 작성하기 : dom tree가 완성될 때 까지 기다리기
+/*window.addEventListener("load",function(){
+	//DOM tree에서 div>a 객체 찾기
+	var aObj = document.querySelector("div>a");
+	
+	//aObj객체에서 클릭이벤트가 발생했을 때 처리할 핸들러 작성하기
+	//할일 : "클릭되었습니다"메세지를 경고창(alert)에 띄우기
+	//	 : 배경색을 yellow로 변경
+	aObj.addEventListener("click", function(event) {
+			alert("클릭되었습니다.");
+			this.style.backgroundColor = 'yellow';
+			event.preventDefault(); //기본이벤트를 막음. 기다려라
+			event.stopPropagation();//이벤트전파 막음
+	});
+	*/
+	/*
+	//이렇게 하면 클릭되었습니다가 안뜨고 바로 google로 넘어감. 
+	aObj.addEventListener("click", function() {
+		alert("클릭되었습니다.");
+		this.style.backgroundColor = 'yellow';
+	});
+	*/
+	/*
+	//DOM tree에서 div객체 찾기
+	var divObj = document.querySelector("div");
+	
+	//divObj객체에서 클릭이벤트가 발생했을 때
+	//할일 : 배경색을 gray로 변경
+	divObj.addEventListener("click", function() {
+		this.style.backgroundColor = 'gray';
+	});
+});
+*/
+</script>
+</head>
+<body>
+<div>
+	<a href="http://www.google.com">구글</a>
+</div>
+</body>
+</html>

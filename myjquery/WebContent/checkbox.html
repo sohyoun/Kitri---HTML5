@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>checkbox.html</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+$(function(){
+	var checkArr = $("div>input[type=checkbox]"); //배열을 반환하는 경우에는 jquery를 저장하는 것이 아니라 javascript객체를 저장함.
+	var allObj = checkArr[0];
+	$(allObj).click(function(){ //따라서 javascript를 $로 감싸야함.
+		for(var i=1; i<checkArr.length; i++){
+			//checkArr[i].checked = allObj.checked;
+			//$(checkArr[i]).attr("checked", $(allObj).attr("checked"));//checked는 true false로 관리됨으로 attr이 아닌 prop으로 해야함.
+			$(checkArr[i]).prop("checked", $(allObj).prop("checked"));
+		}
+	});
+});
+/*
+	window.addEventListener("load", function() {
+		var checkArr = document.querySelectorAll("div>input[type=checkbox]");
+		var allObj = checkArr[0];
+		
+		allObj.addEventListener("click", function() {
+			for(var i=1; i<checkArr.length; i++){
+				checkArr[i].checked = allObj.checked;
+			}
+		});
+	});
+*/
+</script>
+</head>
+<body>
+<div name="allcheck">
+	<input type="checkbox">ALL
+</div>
+<div name="check">
+	<input type="checkbox" checked>ONE&nbsp;&nbsp;
+	<input type="checkbox">TWO&nbsp;&nbsp;
+	<input type="checkbox">THREE
+</div>
+</body>
+</html>
