@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+var a;
+console.log(typeof(a));	//undifined
+console.log(a+1);	//NaN : Not a Number
+//js는 에러가 나지만 실행된다.
+
+var a = 10;	//a변수가 덮어써짐
+console.log(a); //10
+
+var b = function(){
+	var lv = 'hello';
+	gv = "global";
+	for(var i=0; i<10; i++){
+		console.log(i + ", " + lv + ", " + gv);
+	}
+	console.log("in function lv = " + lv); // hello
+	console.log("in function i = " + i); //10	//i를 for문 밖에서도 쓸 수 있다. b안에서만
+	console.log("in function gv = " + gv); //global
+	//lv, i, gv 모두 function b안에서 사용 가능
+}
+console.log(typeof(b));	//function
+console.log(b); //함수의 내용이 그대로 찍힘
+b();
+console.log("out function lv = " + lv); //lv is not defined 에러남
+console.log("out function gv = " + gv); //global 그냥 선언한 gv는 어디서든 쓸 수 있음.
+</script>
+<script>
+window.addEventListener("load", function() {
+	var arr = document.querySelectorAll("button");
+	for(var i=0; i<arr.length; i++){
+		var btObj = arr[i];
+		(
+			function(j){
+				btObj.addEventListener("click", function() {
+					var aObj = document.querySelector("input[name=a]");
+					var bObj = document.querySelector("input[name=b]");
+					var aNum = parseInt(aObj.value);
+					var bNum = parseInt(bObj.value);					
+					//alert(j+"번째 버튼이 클릭되었습니다"); // 이제는 0번째,1번째,2번째,3번째라고 뜬다.
+					switch(j){
+					case 0: // +
+						alert(aNum+bNum);
+						break;
+					case 1: // -
+						alert(aNum-bNum);
+						break;
+					case 2: // *
+						alert(aNum*bNum);
+						break;
+					case 3: // /
+						alert(aNum/bNum);
+						break;
+					}
+				});
+			}
+		)(i);
+		//btObj.addEventListener("click", function() {
+		//alert(i+"번째 버튼이 클릭되었습니다"); //어떤 버튼이 클릭되도 4번째라고만 뜬다. >> addEventListener는 클릭이 됬을 때 실행함!!! 이미 for문은 다 돌아가버린 상태
+		//로드이벤트가 발생할때 실행됨. 이 일이 끝나야지 버튼들이 보여짐(결국 i=4인 상태) 그렇기 때문에 그 후에 버튼을 눌러도 4가 뜬다.
+		//});
+
+		//load의 function()은 돌면서 그 안의 
+		//arr은 배열 버튼으로 생성되어있고 i 변수도 생성되어있음 함수스콥안에 ! 
+		//i가 0일경우 > btObj가 만들어짐. 함수 스콥안에
+		//그 안에 function이 만들어짐
+		//i가 1이면 function또 만들어짐 >>결국 function이 4개 만들어짐. i=4가 되고! 첫번째 버튼 누르면 첫번째함수 호출 
+			
+		
+	}
+});
+
+</script>
+</head>
+<body>
+<input type="text" name="a">
+<input type="text" name="b"><br>
+<button>+</button>
+<button>-</button>
+<button>*</button>
+<button>/</button>
+</body>
+</html>
