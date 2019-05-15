@@ -1,24 +1,57 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<title>로그인</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
-$(document).ready(function() {
-	var $loginBtnObj = $("#loginBtn");
-	//$loginBtnObj.click(function(){});
-	var $loginformObj = $("#loginform");
-	$loginformObj.submit(function(){
-		alert("submitted!!!");
-		$(this).action = "/memberservlet/login";
+/*$(document).ready(function() {
+	//var $loginFormObj = $("#loginform");
+	//$loginFormObj.submit(login); 
+	$("#loginBtn").click(function(){
+		$.ajax({
+			url:"/myjquery/login",
+			data:$("form").serialize(),
+			method:'post',	
+			success:function(result){
+				if(result.trim() == '1') { //성공
+					location.href ="/myjquery/semantic.html"; // client단의 url : pot번호 다음부터! 
+				} else{ //실패
+					alert(result.trim());
+				}
+				
+			},
+			error:function( jqXHR, textStatus, errorThrown){
+				alert(errorThrown);
+			}
+		});
+		return false;
 	});
+	
+});*/
+function login() {	
+	$.ajax({
+		url:"/myjquery/login",
+		data:$("form").serialize(),
+		method:'post',	
+		success:function(result){
+			if(result.trim() == '1'){ //성공
+				location.href="/myjquery/semantic.jsp";
+			}else{ //실패
+				alert(result.trim());	
+			}			
+		},
+		error:function( jqXHR, textStatus, errorThrown){
+			alert(errorThrown);
+		}
+	});
+	return false;
+} 
+$(document).ready(function() {
+	var $loginFormObj = $("#loginform");
+	$loginFormObj.submit(login);
+	var $registerBtnObj = $("#moveRegisterBtn");//회원가입버튼객체
+	$registerBtnObj.click(function(){
+		$("nav>ul>li>a[href='user/signup.html']").trigger("click");
+	});
+
 });
-function login() {
+//function login() {
 	/*if(document.getElementById("id").value==""){
 		alert("아이디 입력!!!");
 		return;
@@ -29,10 +62,8 @@ function login() {
 		document.getElementById("loginform").action="/memberservlet/login";
 		document.getElementById("loginform").submit();
 	}*/
-}
+//}
 </script>
-</head>
-<body>
 
 <div class="container" align="center">
 	<div class="col-lg-6" align="center">
@@ -46,13 +77,11 @@ function login() {
 				<label for="">비밀번호</label>
 				<input type="password" class="form-control" id="pass" name="pass" placeholder="" required>
 			</div>
-			<div class="form-group" align="center">
-				<button class="btn btn-warning" id="loginBtn">로그인</button>
-				<button class="btn btn-primary" id="moveRegisterBtn">회원가입</button>
-			</div>
+			
 		</form>
+		<div class="form-group" align="center">
+				<button class="btn btn-warning" form="loginform" id="loginBtn">로그인</button><!--로그인 버튼은 form안에있는 듯한 submit효과을 갖기 위해선 form 속성 지정 -->
+				<button class="btn btn-primary" id="moveRegisterBtn">회원가입</button><!-- 회원가입 버튼은 form 밖에 있음으로 일반버튼 -->
+		</div>
 	</div>
 </div>
-
-</body>
-</html>

@@ -9,27 +9,29 @@ import javax.servlet.http.*;
 
 import com.kitri.service.CustomerService;
 
-
+/**
+ * Servlet implementation class LoginServlet
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CustomerService service = new CustomerService();
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 		String result = service.login(id, pass);
+		
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginInfo");
-		if(result.equals("1")) { //성공
+		if(result.equals("1")) {//성공
 			session.setAttribute("loginInfo", id);
-		} else {
-			
 		}
+		
+		
 		request.setAttribute("result", result);
-		String path ="/loginresult.jsp"; //이 프로젝트 안에부터!
+		String path = "/loginresult.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
 	}
-
 }
