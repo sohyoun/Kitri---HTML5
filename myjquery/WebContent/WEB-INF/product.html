@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function productList(){
+	$("#plist").empty();
+	$.ajax({
+		url:"/myjquery/productlist",
+		method:"get",
+		success: function(result){
+			var product = $(result).find("product");
+			
+		} 
+	});
+	return false;
+}
+</script>
+</head>
+<body>
+<div>
+<div>
+<img src="/user/login.html">
+<div id="plist">
+카테고리 : <br>
+상품번호 : <br>
+상품명 : <br>
+가격 : <br>
+</div>
+</div>
+</div>
+</body>
+</html>

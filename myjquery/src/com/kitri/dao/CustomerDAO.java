@@ -43,6 +43,7 @@ public class CustomerDAO {
 			e.printStackTrace();
 			throw new NotFoundException(e.getMessage());
 		}finally {
+			//5) 연결닫기
 			if(rs != null) {
 				try {
 					rs.close();
