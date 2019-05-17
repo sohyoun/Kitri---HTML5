@@ -23,13 +23,13 @@ for (Product p : list) { %>
 $(function(){
 	var aSpan = $("span");
 	$(aSpan).click(function() {
-		console.log("proresult: click");
+		//console.log("proresult: click");
 		$.ajax({
 			url : "/myjquery/productinfo",
 			method : "get",
 			data : "no="+$(this).attr("id"),
 			success : function(result){
-				$("#fdetaillist").html(result);
+				$("section").html(result);
 			},
 			error :  function() {
 				console.log("에러남");
@@ -41,5 +41,3 @@ $(function(){
 	
 });
 </script>
-<div id="fdetaillist">
-</div>

@@ -9,4 +9,7 @@ if (id == null) { //로그인 안한 경우
 <%} else {//로그인 한 경우%>
 	<li><a href="logout">로그아웃</a></li>
 <%}%>
+
+	<li><a href="productlist">상품목록</a></li>
+	<li><a href="viewcart.jsp">장바구니보기</a></li>
 </ul>

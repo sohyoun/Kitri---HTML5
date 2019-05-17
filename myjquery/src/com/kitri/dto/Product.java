@@ -8,6 +8,10 @@ public class Product {
 	ProductCategory productCategory; //product table이 더 많이 쓰이기 때문에 여기서 has관계!
 									//product가 productCategory를 사용
 	
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Product(String prod_no, String prod_name, int prod_price, String prod_detail,
 			ProductCategory productCategory) {
@@ -55,5 +59,32 @@ public class Product {
 		return "Product [prod_no=" + prod_no + ", prod_name=" + prod_name + ", prod_price=" + prod_price
 				+ ", prod_detail=" + prod_detail + ", productCategory=" + productCategory + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((prod_no == null) ? 0 : prod_no.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (prod_no == null) {
+			if (other.prod_no != null)
+				return false;
+		} else if (!prod_no.equals(other.prod_no))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

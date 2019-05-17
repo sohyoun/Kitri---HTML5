@@ -22,5 +22,6 @@ $(function(){ //window.onload랑 비슷
 
 </script>
 
+
 <div id="foodlist">
 </div>

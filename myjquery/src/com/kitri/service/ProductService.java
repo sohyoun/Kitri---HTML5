@@ -7,6 +7,7 @@ import com.kitri.dto.Product;
 
 public class ProductService {
 	
+	
 	public List<Product> findAll(){
 		ProductDAO dao = new ProductDAO();
 		List<Product> list = dao.selectAll();
