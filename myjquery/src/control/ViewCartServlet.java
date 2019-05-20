@@ -39,9 +39,7 @@ public class ViewCartServlet extends HttpServlet {
 					int quantity =  c.get(p);
 					rc.put(p1, quantity);
 					
-				} catch (NotFoundException e) {
-					e.printStackTrace();
-				}
+				} catch (NotFoundException e) {}
 			}
 			request.setAttribute("rcart", rc);
 			String path = "/viewcartresult.jsp";
