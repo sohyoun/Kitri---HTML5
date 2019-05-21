@@ -107,6 +107,7 @@ public class OrderDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		List<OrderInfo> list = new ArrayList<>();
 		try {
 			//1)JDBC드라이버로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
