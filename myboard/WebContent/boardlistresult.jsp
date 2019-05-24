@@ -14,11 +14,11 @@ table{
 }
 </style>
 <script>
-$(function(){	
+/* $(function(){	
 	$(".gonum>span").click(function(){
 		$(this).val() = $(pb.currentPage);
 	});
-});
+}); */
 </script>
 <div class="contents">
 <h3>게시글 목록</h3>
@@ -72,6 +72,7 @@ $(function(){
 </span>
 <span class="gofront"> 
 <c:if test="${pb.currentPage != pb.totalPage}">
-	<a href="${pb.endPage+1}">▶</a></div>
+	<a href="${pb.endPage+1}">▶</a>
 </c:if>
 </span>
+</div>
