@@ -27,7 +27,7 @@ public class ProductInfoServlet extends HttpServlet {
 		request.setAttribute("detailresult", p);
 		String path ="/productinforesult.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+		rd.forward(request, response);  
 		
 	}
 
