@@ -9,17 +9,26 @@ table{
 	text-align: center;
 	
 }
-.contents{
-	margin-left: 40%;
-}
 </style>
+
 <script>
 $(function(){	
-	$(".gonum>span").click(function(){
-		$(this).val() = $(pb.currentPage);
+	$(".gonum>a").click(function(){
+		var currentPage = $(this).attr("href");
+		alert(currentPage+"page를 보여줍니다.");
+		$.ajax({
+			url : '${pb.url}',
+			method : 'get',
+			data : 'currentPage='+currentPage,
+			success : function(result){
+				$("section").html(result.trim());
+			}
+		});
+		return false;
 	});
 });
 </script>
+
 <div class="contents">
 <h3>게시글 목록</h3>
 <h6>현재페이지 : ${pb.currentPage}총페이지: ${pb.totalPage}</h6>
@@ -53,7 +62,7 @@ $(function(){
 현재페이지 = 1이면 >> 뒤로가기표시X
 현재페이지 = 총페이지수면 >> 앞으로가기표시X
  -->
-<span class="goback">
+<span class="gonum">
 <c:if test="${pb.currentPage != 1 }">
 	<a href="${pb.startPage - 1}">◀</a>
 </c:if>
@@ -65,13 +74,14 @@ $(function(){
          <span>${i}</span>
        </c:when>
        <c:otherwise>  
-         <span><a href="${i}">${i}</a></span> 
+         <a href="${i}">${i}</a>
        </c:otherwise>
      </c:choose>  
    </c:forEach>
 </span>
-<span class="gofront"> 
+<span class="gonum"> 
 <c:if test="${pb.currentPage != pb.totalPage}">
-	<a href="${pb.endPage+1}">▶</a></div>
+	<a href="${pb.endPage+1}">▶</a>
 </c:if>
 </span>
+</div>
